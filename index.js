@@ -4,7 +4,9 @@ const { dbconfig } = require('./dbconfig')
 const db = mysql.createConnection(dbconfig) //tells where to connect to
 db.connect() //connects
 
-db.query('SELECT * FROM customers', (err, rows) => {
+const customer_name = 'Noah'
+
+db.query(`SELECT * FROM customers LEFT JOIN pets ON customers.id = pets.customer_id WHERE first_name = '${customer_name}'`, (err, rows) => {
     if(err){
         console.error('Error from MySQL:', err)
     } else {
